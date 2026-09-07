@@ -1,23 +1,214 @@
 <!doctype html>
 <html lang="ko">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="광명 감동사진관의 가족사진, 프로필사진, 반려동물사진, 증명사진 촬영 안내와 갤러리입니다.">
+  <meta name="theme-color" content="#ffffff">
   <title>감동사진관 Gamdong Studio | 가족·프로필·반려동물·증명사진</title>
-  <meta name="description" content="광명 감동사진관 - 가족사진, 프로필사진, 반려동물사진, 증명사진 전문" />
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <header><a class="brand" href="#top">감동사진관 <small>Gamdong Studio</small></a><nav><a href="#event">이벤트</a><a href="#services">상품안내</a><a href="#gallery">갤러리</a><a href="#about">소개</a></nav></header>
-  <main id="top">
-    <section class="hero"><img id="hero-image" src="assets/1.webp" alt="감동사진관 가족사진" /><div class="hero-copy"><p>GAMDONG STUDIO</p><h1>사진으로 마음을<br>기록하는 곳</h1><a href="#gallery">사진 보기</a></div></section>
-    <section id="event" class="feature"><p>SEASON EVENT</p><h2>이벤트</h2><img src="assets/chuseok-event.webp" alt="감동사진관 이벤트" /></section>
-    <section id="services" class="feature"><p>PRODUCT GUIDE</p><h2>가족사진 패키지</h2><img src="assets/family-package.webp" alt="가족사진 패키지 가격 안내" /></section>
-    <section class="categories"><p>PHOTOGRAPHY</p><h2>촬영 분야 안내</h2><div class="cards"><a href="#family"><b>01</b><img src="assets/family-pink.webp" alt="가족사진" /><h3>가족사진</h3><span>부모님, 3대 가족, 리마인드 웨딩</span></a><a href="#profile"><b>02</b><img src="assets/profile-iris-1.webp" alt="프로필사진" /><h3>프로필사진</h3><span>개인, 배우, 연주자, 콘셉트 프로필</span></a><a href="#pet"><b>03</b><img src="assets/pet-traditional.webp" alt="반려동물사진" /><h3>반려동물사진</h3><span>아이의 성격을 담은 맞춤 촬영</span></a><a href="#id"><b>04</b><img src="assets/id-photo-gray.webp" alt="증명사진" /><h3>증명사진</h3><span>여권, 주민등록증, 취업사진</span></a></div></section>
-    <section id="gallery" class="gallery"><p>GALLERY</p><h2>갤러리</h2><h3 id="family">가족사진</h3><div class="grid"><img src="assets/family-pink.webp" alt="가족사진"/><img src="assets/family-wedding.webp" alt="가족사진"/><img src="assets/family-classic.webp" alt="가족사진"/></div><h3 id="profile">프로필사진</h3><div class="grid"><img src="assets/profile-iris-1.webp" alt="프로필사진"/><img src="assets/profile-music-1.webp" alt="프로필사진"/><img src="assets/profile-color-1.webp" alt="프로필사진"/><img src="assets/profile-color-2.webp" alt="프로필사진"/><img src="assets/profile-moon-1.webp" alt="프로필사진"/><img src="assets/profile-music-2.webp" alt="프로필사진"/></div><h3 id="pet">반려동물사진</h3><div class="grid"><img src="assets/pet-traditional.webp" alt="반려동물사진"/><img src="assets/pet-graduate-blue.webp" alt="반려동물사진"/><img src="assets/pet-bakery.webp" alt="반려동물사진"/><img src="assets/pet-sport.webp" alt="반려동물사진"/></div><h3 id="id">증명사진</h3><div class="grid"><img src="assets/id-photo-gray.webp" alt="증명사진"/><img src="assets/id-photo-sample.webp" alt="증명사진"/></div></section>
-    <section id="about" class="about"><p>SINCE 2018</p><h2>사진으로 마음을<br>기록하는 곳</h2><div><p>사진을 찍는다는 것은 지금 이 순간의 모습뿐 아니라 그 안에 담긴 마음까지 오래 남기는 일이라고 생각합니다.</p><p>감동사진관은 가족사진, 프로필사진, 반려동물사진, 증명사진을 촬영하며 한 분 한 분의 이야기를 정성스럽게 기록합니다.</p><p>류수민 감동사진관 대표<br>(사)한국프로사진협회 교육자격위원회 위원</p></div></section>
+  <a class="skip-link" href="#main">본문 바로가기</a>
+  <header class="site-header" id="top">
+    <a class="brand" href="#top" aria-label="감동사진관 처음으로">
+      <b>감동사진관</b>
+      <small>Gamdong Studio</small>
+    </a>
+    <button class="menu-button" type="button" aria-expanded="false" aria-controls="main-nav">메뉴</button>
+    <nav id="main-nav" aria-label="주요 메뉴">
+      <ul>
+        <li><a href="#event">이벤트</a></li>
+        <li><a href="#services">상품안내</a></li>
+        <li class="nav-gallery">
+          <a href="#portfolio" aria-haspopup="true">갤러리</a>
+          <ul class="gallery-menu" aria-label="갤러리 분야">
+            <li><a href="#portfolio" data-gallery-nav="family">가족사진</a></li>
+            <li><a href="#portfolio" data-gallery-nav="profile">프로필</a></li>
+            <li><a href="#portfolio" data-gallery-nav="pet">반려동물사진</a></li>
+            <li><a href="#portfolio" data-gallery-nav="idphoto">증명사진</a></li>
+          </ul>
+        </li>
+        <li><a href="#about">소개</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="hero" aria-label="감동사진관 대표 사진 슬라이드">
+      <div class="slides" aria-live="polite">
+        <figure class="slide is-active"><img src="assets/slides/1.webp" alt="감동사진관 가족사진" fetchpriority="high"></figure>
+        <figure class="slide"><img src="assets/slides/2.webp" alt="감동사진관 연주자 프로필사진"></figure>
+        <figure class="slide"><img src="assets/slides/3.webp" alt="감동사진관 클래식 가족사진"></figure>
+        <figure class="slide"><img src="assets/slides/4.webp" alt="감동사진관 화이트톤 가족사진"></figure>
+        <figure class="slide"><img src="assets/slides/5.webp" alt="감동사진관 여성 프로필사진"></figure>
+        <figure class="slide"><img src="assets/slides/6.webp" alt="감동사진관 증명사진 안내"></figure>
+        <figure class="slide"><img src="assets/slides/7.webp" alt="감동사진관 반려동물 전통 콘셉트 사진"></figure>
+        <figure class="slide"><img src="assets/slides/8.webp" alt="감동사진관 콘셉트 프로필사진"></figure>
+        <figure class="slide"><img src="assets/slides/9.webp" alt="감동사진관 반려동물 프로필사진"></figure>
+        <figure class="slide"><img src="assets/slides/10.webp" alt="감동사진관 반려동물 졸업사진"></figure>
+      </div>
+      <button class="slide-arrow slide-prev" type="button" aria-label="이전 사진">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
+      </button>
+      <button class="slide-arrow slide-next" type="button" aria-label="다음 사진">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+      </button>
+      <div class="slide-dots" aria-label="사진 선택">
+        <button class="is-active" type="button" aria-label="1번 사진 보기" aria-current="true"></button>
+        <button type="button" aria-label="2번 사진 보기"></button>
+        <button type="button" aria-label="3번 사진 보기"></button>
+        <button type="button" aria-label="4번 사진 보기"></button>
+        <button type="button" aria-label="5번 사진 보기"></button>
+        <button type="button" aria-label="6번 사진 보기"></button>
+        <button type="button" aria-label="7번 사진 보기"></button>
+        <button type="button" aria-label="8번 사진 보기"></button>
+        <button type="button" aria-label="9번 사진 보기"></button>
+        <button type="button" aria-label="10번 사진 보기"></button>
+      </div>
+    </section>
+
+    <section class="home-choice" aria-label="감동사진관 가족사진 촬영 특징">
+      <img src="assets/home-choice.webp" alt="원본 패키지, 인원 추가 비용 없음, 반려동물 동반 촬영 안내">
+    </section>
+
+    <aside class="quick-links" aria-label="빠른 상담 메뉴">
+      <a class="quick-kakao" href="https://pf.kakao.com/_xeTxewxb/chat" target="_blank" rel="noopener">
+        <span class="quick-icon kakao-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M21 11.2c0 4.5-4 8.1-9 8.1-1.1 0-2.2-.2-3.2-.5L4 21l1.2-4C3.8 15.4 3 13.4 3 11.2 3 6.7 7 3 12 3s9 3.7 9 8.2Z"/><path d="M8.5 11.5h.01M12 11.5h.01M15.5 11.5h.01"/></svg></span>
+        <span>카톡상담</span>
+      </a>
+      <a class="quick-phone" href="tel:01034722271">
+        <span class="quick-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 14v-2a8 8 0 0 1 16 0v2"/><path d="M18 19h-2v-6h4v4a2 2 0 0 1-2 2ZM6 19H4v-6h4v6H6Z"/><path d="M16 19c0 1-1.2 2-3 2h-1"/></svg></span>
+        <span>전화문의</span>
+      </a>
+      <a class="quick-instagram" href="https://www.instagram.com/gamdong71/" target="_blank" rel="noopener">
+        <span class="quick-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.5 6.5h.01"/></svg></span>
+        <span>인스타</span>
+      </a>
+      <a class="quick-map" href="https://pcmap.place.naver.com/place/1628863251/home" target="_blank" rel="noopener">
+        <span class="quick-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m4 4 7 16 2.6-6.4L20 11 4 4Z"/><path d="m13.6 13.6 4.4 4.4"/></svg></span>
+        <span>오시는길</span>
+      </a>
+    </aside>
+
+    <section class="visual-section event-visual" id="event" aria-labelledby="event-title">
+      <div class="visual-heading">
+        <p class="eyebrow">SEASON EVENT</p>
+        <h1 id="event-title">이벤트</h1>
+      </div>
+      <a class="event-poster" href="https://pf.kakao.com/_xeTxewxb/chat" target="_blank" rel="noopener" aria-label="추석 가족사진 이벤트 카카오톡 상담하기">
+        <img src="assets/chuseok-event.webp" alt="감동사진관 한가위 가족사진 이벤트">
+      </a>
+    </section>
+
+    <section class="visual-section package-visual" id="services" aria-labelledby="services-title">
+      <div class="visual-heading">
+        <p class="eyebrow">PRODUCT GUIDE</p>
+        <h1 id="services-title">가족사진 패키지</h1>
+      </div>
+      <img class="package-guide" src="assets/family-package.webp" alt="감동사진관 가족사진 패키지 가격과 구성 안내">
+    </section>
+
+    <section class="services" id="categories" aria-labelledby="categories-title">
+      <div class="section-heading">
+        <p class="eyebrow">PHOTOGRAPHY</p>
+        <h1 id="categories-title">촬영 분야 안내</h1>
+        <p>원하는 촬영 분야를 선택하면 해당 사진을 바로 확인할 수 있습니다.</p>
+      </div>
+      <div class="service-grid">
+        <a href="#portfolio" data-gallery-target="family"><img src="assets/family-pink.webp" alt="가족사진 대표 이미지" loading="lazy"><span>01</span><h2>가족사진</h2><p>부모님, 3대 가족, 리마인드 웨딩</p><b>사진 보기</b></a>
+        <a href="#portfolio" data-gallery-target="profile"><img src="assets/profile-iris-1.webp" alt="프로필사진 대표 이미지" loading="lazy"><span>02</span><h2>프로필사진</h2><p>개인, 배우, 연주자, 콘셉트 프로필</p><b>사진 보기</b></a>
+        <a href="#portfolio" data-gallery-target="pet"><img src="assets/pet-traditional.webp" alt="반려동물사진 대표 이미지" loading="lazy"><span>03</span><h2>반려동물사진</h2><p>아이의 성격을 담은 맞춤 촬영</p><b>사진 보기</b></a>
+        <a href="#portfolio" data-gallery-target="idphoto"><img src="assets/id-photo-gray.webp" alt="회색 배경 증명사진 대표 이미지" loading="lazy"><span>04</span><h2>증명사진</h2><p>여권, 주민등록증, 취업사진</p><b>사진 보기</b></a>
+      </div>
+    </section>
+
+    <section class="portfolio" id="portfolio" aria-labelledby="portfolio-title">
+      <div class="portfolio-heading">
+        <p class="eyebrow">GALLERY</p>
+        <h1 id="portfolio-title">갤러리</h1>
+      </div>
+      <div class="gallery-tabs" role="tablist" aria-label="사진 분야 선택">
+        <button id="tab-family" class="is-active" type="button" role="tab" aria-selected="true" aria-controls="panel-family" data-gallery="family">가족사진</button>
+        <button id="tab-profile" type="button" role="tab" aria-selected="false" aria-controls="panel-profile" data-gallery="profile">프로필</button>
+        <button id="tab-pet" type="button" role="tab" aria-selected="false" aria-controls="panel-pet" data-gallery="pet">반려동물사진</button>
+        <button id="tab-idphoto" type="button" role="tab" aria-selected="false" aria-controls="panel-idphoto" data-gallery="idphoto">증명사진</button>
+      </div>
+
+      <div id="panel-family" class="gallery-panel is-active" role="tabpanel" aria-labelledby="tab-family" data-panel="family">
+        <button class="photo photo-wide" data-full="assets/family-pink.webp"><img src="assets/family-pink.webp" alt="분홍색 의상으로 맞춰 입은 대가족사진" loading="lazy"></button>
+        <button class="photo" data-full="assets/family-wedding.webp"><img src="assets/family-wedding.webp" alt="부모님과 자녀가 함께한 웨딩 가족사진" loading="lazy"></button>
+        <button class="photo" data-full="assets/family-classic.webp"><img src="assets/family-classic.webp" alt="부모님과 자녀가 함께한 클래식 가족사진" loading="lazy"></button>
+      </div>
+      <div id="panel-profile" class="gallery-panel" role="tabpanel" aria-labelledby="tab-profile" data-panel="profile" hidden>
+        <button class="photo" data-full="assets/profile-iris-1.webp"><img src="assets/profile-iris-1.webp" alt="밝고 깨끗한 여성 프로필" loading="lazy"></button>
+        <button class="photo" data-full="assets/profile-music-1.webp"><img src="assets/profile-music-1.webp" alt="연주자 프로필" loading="lazy"></button>
+        <button class="photo" data-full="assets/profile-color-1.webp"><img src="assets/profile-color-1.webp" alt="컬러 남성 프로필" loading="lazy"></button>
+        <button class="photo" data-full="assets/profile-color-2.webp"><img src="assets/profile-color-2.webp" alt="컬러 여성 프로필" loading="lazy"></button>
+        <button class="photo" data-full="assets/profile-moon-1.webp"><img src="assets/profile-moon-1.webp" alt="회색 배경 여성 프로필" loading="lazy"></button>
+        <button class="photo" data-full="assets/profile-music-2.webp"><img src="assets/profile-music-2.webp" alt="악기와 함께 촬영한 프로필" loading="lazy"></button>
+      </div>
+      <div id="panel-pet" class="gallery-panel pet-panel" role="tabpanel" aria-labelledby="tab-pet" data-panel="pet" hidden>
+        <button class="photo" data-full="assets/pet-traditional.webp"><img src="assets/pet-traditional.webp" alt="전통 돌상 콘셉트 반려견사진" loading="lazy"></button>
+        <button class="photo" data-full="assets/pet-graduate-blue.webp"><img src="assets/pet-graduate-blue.webp" alt="파란 학사모를 쓴 반려견사진" loading="lazy"></button>
+        <button class="photo" data-full="assets/pet-bakery.webp"><img src="assets/pet-bakery.webp" alt="베이커리 콘셉트 반려견사진" loading="lazy"></button>
+        <button class="photo" data-full="assets/pet-sport.webp"><img src="assets/pet-sport.webp" alt="스포츠 유니폼을 입은 반려견사진" loading="lazy"></button>
+      </div>
+      <div id="panel-idphoto" class="gallery-panel id-panel" role="tabpanel" aria-labelledby="tab-idphoto" data-panel="idphoto" hidden>
+        <button class="photo" data-full="assets/id-photo-sample.webp"><img src="assets/id-photo-sample.webp" alt="회색, 파란색, 분홍색, 베이지색 배경의 감동사진관 증명사진 4컷 샘플" loading="lazy"></button>
+      </div>
+    </section>
+
+    <section class="about" id="about" aria-labelledby="about-title">
+      <div class="about-year"><span>SINCE</span><b>2018</b></div>
+      <div class="about-content">
+        <p class="eyebrow">ABOUT GAMDONG</p>
+        <h1 id="about-title">사진으로 마음을<br>기록하는 곳</h1>
+        <div class="about-story">
+          <p class="about-lead">사진을 찍는다는 것은<br>지금 이 순간의 모습뿐 아니라 그 안에 담긴 마음까지 오래 남기는 일이라고 생각합니다.</p>
+          <p>감동사진관은 2018년부터 가족사진, 프로필사진, 반려동물사진, 증명사진을 촬영하며 한 분 한 분의 이야기를 정성스럽게 기록해왔습니다. 정해진 표정과 자세를 요구하기보다 각자의 분위기와 관계가 자연스럽게 드러나는 사진, 시간이 지나 다시 꺼내 보았을 때 그날의 온도까지 떠올릴 수 있는 사진을 지향합니다.</p>
+          <p>감동사진관을 운영하는 사진가 류수민은 (사)한국프로사진협회 교육자격위원회 위원으로 활동하고 있습니다. 인물사진 촬영뿐 아니라 스마트폰 사진, DSLR, AI 이미지·영상 등 다양한 분야의 강의를 진행하며 사진을 더 쉽고 즐겁게 경험할 수 있도록 돕고 있습니다.</p>
+          <p>화려하게 꾸민 사진보다 그 사람다운 모습이 잘 담긴 사진,<br class="desktop-story-break"> 촬영하는 순간까지 좋은 기억으로 남는 사진을 만들겠습니다.</p>
+          <p class="about-signoff">사진으로 마음을 기록하는 곳,<br><strong>감동사진관입니다.</strong></p>
+        </div>
+        <div class="career">
+          <h2>류수민 <span>감동사진관 대표</span></h2>
+          <ul class="career-summary">
+            <li>(사)한국프로사진협회 교육자격위원회 위원</li>
+            <li>가족·프로필·반려동물·증명사진 전문 촬영</li>
+            <li>스마트폰 사진·DSLR·AI 이미지 및 영상 강의</li>
+          </ul>
+          <ol class="career-history">
+            <li><time>2024</time><span>유기견 입양 장려 개인 사진전 <span class="exhibition-line">〈평생 함께 할‘개’〉 개최</span></span></li>
+            <li><time>2016</time><span>Professional Photographers of Korea 작품상 수상</span></li>
+            <li><time>2015</time><span>PPA International Photographic Competition Silver Medal</span></li>
+            <li><time>2015</time><span>대한민국 스타예술대상 사진 부문 수상</span></li>
+            <li><time>2014</time><span>제4회 대한민국 다문화예술대상 사진작가 부문 대상</span></li>
+            <li><time>2013</time><span>월간문학세계 시 부문 신인문학상 수상</span></li>
+            <li><time>2012</time><span>대한민국 다문화예술대상 사회봉사상 수상</span></li>
+          </ol>
+        </div>
+      </div>
+    </section>
   </main>
-  <aside><a href="https://pf.kakao.com/_xeTxewxb/chat" target="_blank">카톡</a><a href="tel:01034722271">전화</a><a href="https://www.instagram.com/gamdong71/" target="_blank">인스타</a><a href="https://pcmap.place.naver.com/place/1628863251/home" target="_blank">오시는길</a></aside>
-  <footer>감동사진관 Gamdong Studio<br>경기 광명시 광명로 841 동진플라자 3층 3호 · 02-2689-7171 · gamdong71@naver.com<br><small>광명 감동사진관은 지점이 없으며, 구미 감동스튜디오와는 별개의 업체입니다.</small></footer>
+
+  <footer>
+    <div><b>감동사진관 <em>Gamdong Studio</em></b><span>경기 광명시 광명로 841 동진플라자 3층 3호</span></div>
+    <div class="footer-links"><a href="tel:0226897171">02-2689-7171</a><a href="mailto:gamdong71@naver.com">gamdong71@naver.com</a></div>
+    <p>광명 감동사진관은 지점이 없으며, 구미 감동스튜디오와 별개의 업체입니다.</p>
+    <small>© <span id="year"></span> GAMDONG STUDIO.</small>
+  </footer>
+
+  <nav class="mobile-quick" aria-label="모바일 빠른 메뉴">
+    <a class="quick-kakao" href="https://pf.kakao.com/_xeTxewxb/chat" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 11.2c0 4.5-4 8.1-9 8.1-1.1 0-2.2-.2-3.2-.5L4 21l1.2-4C3.8 15.4 3 13.4 3 11.2 3 6.7 7 3 12 3s9 3.7 9 8.2Z"/></svg>카톡</a>
+    <a class="quick-phone" href="tel:01034722271"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 14v-2a8 8 0 0 1 16 0v2"/><path d="M18 19h-2v-6h4v4a2 2 0 0 1-2 2ZM6 19H4v-6h4v6H6Z"/></svg>전화</a>
+    <a class="quick-instagram" href="https://www.instagram.com/gamdong71/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/></svg>인스타</a>
+    <a class="quick-map" href="https://pcmap.place.naver.com/place/1628863251/home" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m4 4 7 16 2.6-6.4L20 11 4 4Z"/></svg>오시는길</a>
+  </nav>
+
+  <dialog class="lightbox" aria-label="사진 크게 보기">
+    <img src="" alt="" title="사진을 다시 누르면 닫힙니다">
+  </dialog>
   <script src="script.js"></script>
-</body></html>
+<script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a3749ea888dbb152',t:'MTc4ODc3MjY0MA=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
