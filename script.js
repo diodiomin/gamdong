@@ -102,18 +102,64 @@ document.querySelectorAll('[data-gallery-nav]').forEach(link => {
 
 const lightbox = document.querySelector('.lightbox');
 const lightboxImage = lightbox?.querySelector('img');
+const lightboxCount = lightbox?.querySelector('.lightbox-count');
+const lightboxPrev = lightbox?.querySelector('.lightbox-prev');
+const lightboxNext = lightbox?.querySelector('.lightbox-next');
+const lightboxClose = lightbox?.querySelector('.lightbox-close');
+const lightboxStage = lightbox?.querySelector('.lightbox-stage');
+let lightboxPhotos = [];
+let lightboxIndex = 0;
+let lightboxTouchStartX = 0;
+
+function showLightboxPhoto(index) {
+  if (!lightboxImage || !lightboxPhotos.length) return;
+  lightboxIndex = (index + lightboxPhotos.length) % lightboxPhotos.length;
+  const button = lightboxPhotos[lightboxIndex];
+  lightboxImage.src = button.dataset.full;
+  lightboxImage.alt = button.querySelector('img')?.alt || '포트폴리오 사진';
+  if (lightboxCount) lightboxCount.textContent = `${lightboxIndex + 1} / ${lightboxPhotos.length}`;
+}
+
+function closeLightbox() {
+  if (!lightbox?.open) return;
+  lightbox.close();
+}
+
 document.querySelectorAll('.photo[data-full]').forEach(button => {
   button.addEventListener('click', () => {
     if (!lightbox || !lightboxImage) return;
-    lightboxImage.src = button.dataset.full;
-    lightboxImage.alt = button.querySelector('img')?.alt || '포트폴리오 사진';
+    const panel = button.closest('[data-panel]');
+    lightboxPhotos = [...(panel || document).querySelectorAll('.photo[data-full]')];
+    showLightboxPhoto(lightboxPhotos.indexOf(button));
     lightbox.showModal();
+    document.body.classList.add('lightbox-open');
   });
 });
 
-lightboxImage?.addEventListener('click', () => lightbox.close());
+lightboxPrev?.addEventListener('click', () => showLightboxPhoto(lightboxIndex - 1));
+lightboxNext?.addEventListener('click', () => showLightboxPhoto(lightboxIndex + 1));
+lightboxClose?.addEventListener('click', closeLightbox);
 lightbox?.addEventListener('click', event => {
-  if (event.target === lightbox) lightbox.close();
+  if (event.target === lightbox) closeLightbox();
 });
+lightbox?.addEventListener('close', () => document.body.classList.remove('lightbox-open'));
+lightbox?.addEventListener('keydown', event => {
+  if (event.key === 'ArrowLeft') {
+    event.preventDefault();
+    showLightboxPhoto(lightboxIndex - 1);
+  }
+  if (event.key === 'ArrowRight') {
+    event.preventDefault();
+    showLightboxPhoto(lightboxIndex + 1);
+  }
+});
+lightboxStage?.addEventListener('touchstart', event => {
+  lightboxTouchStartX = event.changedTouches[0].clientX;
+}, { passive: true });
+lightboxStage?.addEventListener('touchend', event => {
+  const distance = event.changedTouches[0].clientX - lightboxTouchStartX;
+  if (Math.abs(distance) < 45) return;
+  showLightboxPhoto(lightboxIndex + (distance < 0 ? 1 : -1));
+}, { passive: true });
 
 document.querySelector('#year').textContent = new Date().getFullYear();
