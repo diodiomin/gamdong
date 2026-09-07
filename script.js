@@ -105,7 +105,6 @@ const lightboxImage = lightbox?.querySelector('img');
 const lightboxCount = lightbox?.querySelector('.lightbox-count');
 const lightboxPrev = lightbox?.querySelector('.lightbox-prev');
 const lightboxNext = lightbox?.querySelector('.lightbox-next');
-const lightboxClose = lightbox?.querySelector('.lightbox-close');
 const lightboxStage = lightbox?.querySelector('.lightbox-stage');
 let lightboxPhotos = [];
 let lightboxIndex = 0;
@@ -138,7 +137,7 @@ document.querySelectorAll('.photo[data-full]').forEach(button => {
 
 lightboxPrev?.addEventListener('click', () => showLightboxPhoto(lightboxIndex - 1));
 lightboxNext?.addEventListener('click', () => showLightboxPhoto(lightboxIndex + 1));
-lightboxClose?.addEventListener('click', closeLightbox);
+lightboxImage?.addEventListener('click', closeLightbox);
 lightbox?.addEventListener('click', event => {
   if (event.target === lightbox) closeLightbox();
 });
