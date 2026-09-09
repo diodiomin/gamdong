@@ -1,3 +1,53 @@
+(function applySeoMetadata() {
+  document.title = '광명 감동사진관 | 가족사진·프로필·증명사진·반려동물사진';
+
+  const descriptionText = '광명 감동사진관은 가족사진, 프로필사진, 증명사진, 여권사진, 취업사진, 반려동물사진을 촬영합니다. 경기 광명시 광명로 841 동진플라자 3층.';
+  let description = document.querySelector('meta[name="description"]');
+  if (!description) {
+    description = document.createElement('meta');
+    description.name = 'description';
+    document.head.appendChild(description);
+  }
+  description.content = descriptionText;
+
+  let canonical = document.querySelector('link[rel="canonical"]');
+  if (!canonical) {
+    canonical = document.createElement('link');
+    canonical.rel = 'canonical';
+    document.head.appendChild(canonical);
+  }
+  canonical.href = 'https://gamdongstudio.co.kr/';
+
+  if (!document.querySelector('#gamdong-local-business-schema')) {
+    const schema = document.createElement('script');
+    schema.id = 'gamdong-local-business-schema';
+    schema.type = 'application/ld+json';
+    schema.textContent = JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'LocalBusiness',
+      name: '감동사진관',
+      alternateName: 'Gamdong Studio',
+      url: 'https://gamdongstudio.co.kr/',
+      image: 'https://gamdongstudio.co.kr/assets/slides/1.webp',
+      description: '경기 광명시에서 가족사진, 프로필사진, 증명사진, 여권사진, 취업사진, 반려동물사진을 촬영하는 감동사진관입니다.',
+      telephone: '+82-2-2689-7171',
+      email: 'gamdong71@naver.com',
+      address: {
+        '@type': 'PostalAddress',
+        streetAddress: '광명로 841 동진플라자 3층 3호',
+        addressLocality: '광명시',
+        addressRegion: '경기도',
+        addressCountry: 'KR'
+      },
+      sameAs: [
+        'https://www.instagram.com/gamdong71/',
+        'https://pcmap.place.naver.com/place/1628863251/home'
+      ]
+    });
+    document.head.appendChild(schema);
+  }
+})();
+
 const menuButton = document.querySelector('.menu-button');
 const nav = document.querySelector('#main-nav');
 
