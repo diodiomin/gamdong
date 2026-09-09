@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="theme-color" content="#f7f5f2" />
+  <meta name="robots" content="noindex,nofollow,noarchive" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.jsdelivr.net; worker-src 'self' blob: https://cdn.jsdelivr.net; connect-src 'self' https://cdn.jsdelivr.net; img-src 'self' data: blob:; style-src 'self'; font-src 'self' data:; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests" />
+  <title>PRIMO DESK · STUDIO</title>
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <div id="lockScreen" class="lock-screen">
+    <div class="lock-card">
+      <div class="brand-lock">PRIMO DESK</div>
+      <div class="lock-sub">STUDIO · 사진관 예약·고객관리</div>
+      <div id="setupBox" class="hidden">
+        <h1>처음 사용할 비밀번호를 정해주세요</h1>
+        <p>고객정보는 이 브라우저 안에서 암호화되어 저장됩니다. 비밀번호를 잊으면 복구할 수 없습니다.</p>
+        <label>새 비밀번호<input id="setupPassword" type="password" autocomplete="new-password" minlength="8" /></label>
+        <label>비밀번호 확인<input id="setupPassword2" type="password" autocomplete="new-password" minlength="8" /></label>
+        <button id="setupBtn" class="primary wide">PRIMO DESK 시작</button>
+      </div>
+      <div id="unlockBox" class="hidden">
+        <h1>PRIMO DESK 잠금 해제</h1>
+        <p>마스터 비밀번호를 입력하세요.</p>
+        <label>비밀번호<input id="unlockPassword" type="password" autocomplete="current-password" /></label>
+        <button id="unlockBtn" class="primary wide">열기</button>
+      </div>
+      <div id="lockMessage" class="lock-message"></div>
+    </div>
+  </div>
+
+  <div id="app" class="app hidden" aria-hidden="true">
+    <aside class="sidebar">
+      <div class="brand">
+        <strong>PRIMO DESK</strong>
+        <span>STUDIO</span>
+      </div>
+      <nav>
+        <button class="nav-item active" data-view="home">⌂ <span>HOME</span></button>
+        <button class="nav-item" data-view="calendar">▦ <span>예약 캘린더</span></button>
+        <button class="nav-item" data-view="customers">◎ <span>고객관리</span></button>
+        <button class="nav-item" data-view="reminders">◷ <span>안내 예정</span></button>
+        <button class="nav-item" data-view="settings">⚙ <span>설정</span></button>
+      </nav>
+      <div class="side-bottom">
+        <button id="backupBtn" class="text-btn">암호화 백업</button>
+        <label class="text-btn file-label">백업 가져오기<input id="importBackup" type="file" accept="application/json" /></label>
+        <button id="lockBtn" class="text-btn danger-text">잠금</button>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div>
+          <h1 id="viewTitle">오늘 예약</h1>
+          <p id="todayLabel"></p>
+        </div>
+        <div class="top-actions">
+          <button id="pasteHintBtn" class="ghost">⌘ Ctrl+V 예약</button>
+          <button id="newBookingBtn" class="primary">+ 예약 등록</button>
+        </div>
+      </header>
+
+      <section id="homeView" class="view active">
+        <div class="stats" id="stats"></div>
+        <div class="home-grid">
+          <section class="panel calendar-panel">
+            <div class="panel-head">
+              <div>
+                <span class="eyebrow">CALENDAR</span>
+                <h2 id="calendarTitle"></h2>
+              </div>
+              <div class="calendar-controls">
+                <button id="prevMonth" class="icon-btn" aria-label="이전 달">‹</button>
+                <button id="todayMonth" class="ghost small">오늘</button>
+                <button id="nextMonth" class="icon-btn" aria-label="다음 달">›</button>
+              </div>
+            </div>
+            <div class="weekday-row"><span>일</span><span>월</span><span>화</span><span>수</span><span>목</span><span>금</span><span>토</span></div>
+            <div id="calendarGrid" class="calendar-grid"></div>
+          </section>
+
+          <div class="right-stack">
+            <section class="panel">
+              <div class="panel-head compact"><div><span class="eyebrow">TODAY</span><h2>오늘 예약</h2></div><span id="todayCountBadge" class="badge"></span></div>
+              <div id="todayBookings" class="list"></div>
+            </section>
+            <section class="panel paste-panel" id="pasteZone" tabindex="0">
+              <div class="paste-icon">⌘V</div>
+              <div>
+                <span class="eyebrow">NAVER CAPTURE</span>
+                <h2>Print Screen → Ctrl+V</h2>
+                <p>네이버 예약 화면을 캡처한 뒤 여기에서 붙여넣으면 브라우저 안에서 예약 내용을 읽습니다.</p>
+              </div>
+            </section>
+            <section class="panel">
+              <div class="panel-head compact"><div><span class="eyebrow">REMINDER</span><h2>안내할 고객</h2></div><span id="reminderCountBadge" class="badge"></span></div>
+              <div id="homeReminders" class="list"></div>
+            </section>
+          </div>
+        </div>
+      </section>
+
+      <section id="calendarView" class="view">
+        <section class="panel full-panel">
+          <div class="panel-head">
+            <div><span class="eyebrow">BOOKING</span><h2>전체 예약</h2></div>
+            <div class="filters">
+              <input id="bookingSearch" class="search" placeholder="이름·전화번호·메모 검색" />
+              <select id="bookingFilterType"><option value="">전체 촬영</option></select>
+              <select id="bookingFilterSource"><option value="">전체 경로</option></select>
+            </div>
+          </div>
+          <div id="bookingTable" class="table-wrap"></div>
+        </section>
+      </section>
+
+      <section id="customersView" class="view">
+        <section class="panel full-panel">
+          <div class="panel-head">
+            <div><span class="eyebrow">CUSTOMER</span><h2>고객관리</h2></div>
+            <input id="customerSearch" class="search" placeholder="이름 또는 전화번호 검색" />
+          </div>
+          <div id="customerTable" class="table-wrap"></div>
+        </section>
+      </section>
+
+      <section id="remindersView" class="view">
+        <section class="panel full-panel">
+          <div class="panel-head"><div><span class="eyebrow">MESSAGE</span><h2>예약 안내 예정</h2></div></div>
+          <p class="help">1차 무료 버전은 자동 문자 발송 대신, 발송할 고객을 보여주고 문구를 한 번에 복사합니다.</p>
+          <div id="reminderList" class="cards"></div>
+        </section>
+      </section>
+
+      <section id="settingsView" class="view">
+        <div class="settings-grid">
+          <section class="panel">
+            <span class="eyebrow">SECURITY</span><h2>보안</h2>
+            <div class="setting-row"><div><strong>자동 잠금</strong><p>15분 동안 사용하지 않으면 자동 잠금</p></div><span class="ok">사용 중</span></div>
+            <div class="setting-row"><div><strong>로컬 암호화</strong><p>AES-GCM + PBKDF2로 고객정보 저장</p></div><span class="ok">사용 중</span></div>
+            <div class="setting-row"><div><strong>캡처 원본</strong><p>OCR 후 이미지 자체는 저장하지 않음</p></div><span class="ok">사용 중</span></div>
+          </section>
+          <section class="panel">
+            <span class="eyebrow">REMINDER</span><h2>가족사진 예약 안내</h2>
+            <label class="toggle-row"><span>7일 전 안내</span><input id="reminder7" type="checkbox" /></label>
+            <label class="toggle-row"><span>1일 전 안내</span><input id="reminder1" type="checkbox" /></label>
+            <p class="help">자동 문자/알림톡은 이후 선택 기능으로 연결합니다. 현재는 무료 문구 복사 방식입니다.</p>
+          </section>
+          <section class="panel">
+            <span class="eyebrow">CALENDAR</span><h2>외부 캘린더</h2>
+            <div class="integration-row"><span>Google Calendar</span><button class="ghost" disabled>다음 단계</button></div>
+            <div class="integration-row"><span>Naver Calendar</span><button class="ghost" disabled>다음 단계</button></div>
+            <p class="help">고객 데이터 구조와 예약 화면을 먼저 안정화한 뒤 연결합니다.</p>
+          </section>
+          <section class="panel">
+            <span class="eyebrow">DATA</span><h2>데이터</h2>
+            <p class="help">이 버전의 데이터는 현재 브라우저에만 암호화 저장됩니다. 다른 PC와 동기화하려면 다음 단계의 보안 서버 연결이 필요합니다.</p>
+            <button id="clearAllBtn" class="danger">모든 데이터 초기화</button>
+          </section>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div id="bookingModal" class="modal hidden" role="dialog" aria-modal="true">
+    <div class="modal-card">
+      <div class="modal-head"><div><span class="eyebrow">BOOKING</span><h2 id="bookingModalTitle">예약 등록</h2></div><button class="close" data-close="bookingModal">×</button></div>
+      <form id="bookingForm" class="form-grid">
+        <input id="bookingId" type="hidden" />
+        <label>날짜<input id="bDate" type="date" required /></label>
+        <label>시간<input id="bTime" type="time" required /></label>
+        <label>고객명<input id="bName" required autocomplete="off" /></label>
+        <label>전화번호<input id="bPhone" inputmode="tel" autocomplete="off" placeholder="010-0000-0000" required /></label>
+        <label>촬영 종류<select id="bType" required></select></label>
+        <label>예약 경로<select id="bSource" required></select></label>
+        <label>예약 상태<select id="bStatus"><option value="예약">예약</option><option value="방문완료">방문완료</option><option value="취소">취소</option></select></label>
+        <label id="babyNameWrap" class="hidden">아기 이름<input id="bBabyName" /></label>
+        <label id="babyBirthWrap" class="hidden">아기 생년월일<input id="bBabyBirth" type="date" /></label>
+        <label class="full">예약 메모<textarea id="bMemo" rows="3" placeholder="촬영 요청, 고객 특이사항 등"></textarea></label>
+        <div id="existingCustomerHint" class="customer-hint full hidden"></div>
+        <div class="modal-actions full"><button type="button" class="ghost" data-close="bookingModal">취소</button><button type="submit" class="primary">예약 저장</button></div>
+      </form>
+    </div>
+  </div>
+
+  <div id="customerModal" class="modal hidden" role="dialog" aria-modal="true">
+    <div class="modal-card wide-card">
+      <div class="modal-head"><div><span class="eyebrow">CUSTOMER</span><h2 id="customerNameTitle"></h2></div><button class="close" data-close="customerModal">×</button></div>
+      <div id="customerDetail"></div>
+    </div>
+  </div>
+
+  <div id="ocrModal" class="modal hidden" role="dialog" aria-modal="true">
+    <div class="modal-card wide-card">
+      <div class="modal-head"><div><span class="eyebrow">NAVER CAPTURE</span><h2>캡처에서 예약 읽기</h2></div><button class="close" data-close="ocrModal">×</button></div>
+      <div id="ocrProgress" class="ocr-progress">이미지를 확인하고 있어요…</div>
+      <div class="ocr-layout">
+        <div class="ocr-preview-wrap"><img id="ocrPreview" alt="붙여넣은 예약 캡처 미리보기" /></div>
+        <div>
+          <div class="form-grid">
+            <label>날짜<input id="oDate" type="date" /></label>
+            <label>시간<input id="oTime" type="time" /></label>
+            <label>고객명<input id="oName" /></label>
+            <label>전화번호<input id="oPhone" /></label>
+            <label>촬영 종류<select id="oType"></select></label>
+            <label>예약 경로<input value="네이버" disabled /></label>
+            <label class="full">인식된 원문<textarea id="ocrText" rows="8"></textarea></label>
+          </div>
+          <div class="privacy-note">캡처 이미지는 서버로 업로드하거나 저장하지 않습니다. 예약 저장 시 입력한 텍스트 정보만 암호화 저장됩니다.</div>
+          <div class="modal-actions"><button class="ghost" data-close="ocrModal">취소</button><button id="ocrToBooking" class="primary">확인 후 예약 등록</button></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast" class="toast hidden"></div>
+  <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js" defer></script>
+  <script src="./app.js" defer></script>
+</body>
+</html>
